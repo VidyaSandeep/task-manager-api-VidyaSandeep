@@ -1,9 +1,12 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const projectsRoute = require('./test/routes/projectsRoute');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/api/v1/getAllProjects', projectsRoute);
 
 app.listen(port, (err) => {
     if (err) {
@@ -11,6 +14,11 @@ app.listen(port, (err) => {
     }
     console.log(`Server is listening on ${port}`);
 });
+
+app.get('/', (req, res) => {
+    console.log(req.query); 
+    res.send('Hello World!');
+})
 
 
 
